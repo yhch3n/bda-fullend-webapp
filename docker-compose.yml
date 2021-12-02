@@ -12,7 +12,11 @@ services:
     build: ./frontend
     ports:
       - "8080:8080"
-    # volumes:
-    #   - ./frontend:/usr/src/frontend
+    volumes:
+      - ./frontend:/usr/src/frontend
+      - exclude:/usr/src/frontend/node_modules/
     depends_on:
       - backend
+
+volumes:
+    exclude:
