@@ -4,6 +4,7 @@ from schemas import TweetUrlSchema, ResultSchema
 from flask_cors import CORS
 from helpers import get_tweet_content
 from models.model_mfas import init_mfas, run_mfas_inference
+from models.model_clip import init_clip, run_clip_inference
 
 
 app = Flask(__name__)
@@ -11,7 +12,10 @@ CORS(app)
 
 # load model first
 model_mfas = init_mfas()
+model_clip = init_clip()
 
+
+# device = "cuda" if torch.cuda.is_available() else "cpu"
 @app.route('/')
 def hello():
     return 'Hello, World!'
@@ -38,8 +42,9 @@ def predict():
         app.logger.info('img_url: %s', img_url)
 
         mfas_res = run_mfas_inference(text, img_url, model_mfas)
+        clip_res = run_clip_inference(text, img_url, model_clip)
 
-        result = {'clip': 'Anti-Vaxx', 'mfas': mfas_res}
+        result = {'clip': clip_res, 'mfas': mfas_res}
         return jsonify(ResultSchema().dump(result)), HTTPStatus.OK
     except Exception as e:
         abort(400, e)
