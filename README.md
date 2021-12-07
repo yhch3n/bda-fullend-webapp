@@ -8,6 +8,7 @@ Make sure Docker have 5GB memory
 Since the weight is too big, we need to download and put into model_weights/
 
 MFAS weight download: https://drive.google.com/file/d/1R_6OymhbK4sQv6p-o0PMfGFrpfwaE1xa/view?usp=sharing
+
 CLIP weight download: https://drive.google.com/file/d/1OgNlQQLiso0F1P03m4CG4Kb6B022_ItU/view?usp=sharing
 
 ### **Reminder**
